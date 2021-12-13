@@ -116,11 +116,11 @@ class VenueForm(FlaskForm):
             ('Other', 'Other'),
         ]
     )
-    facebook_link = URLField(
-        'facebook_link'
+    facebook_link = StringField(
+        'facebook_link', validators=[URL()],
     )
-    website_link = URLField(
-        'website_link'
+    website_link = StringField(
+        'website_link', validators=[URL()],
     )
 
     seeking_talent = BooleanField( 'seeking_talent' )
@@ -224,19 +224,19 @@ class ArtistForm(FlaskForm):
             ('Soul', 'Soul'),
             ('Other', 'Other'),
         ]
-     )
-    facebook_link = URLField(
+    )
+    facebook_link = StringField(
         # TODO implement enum restriction
-        'facebook_link'
-     )
+        'facebook_link', validators=[URL()],
+    )
 
-    website_link = URLField(
-        'website_link'
-     )
+    website_link = StringField(
+        'website_link', validators=[URL()],
+    )
 
     seeking_venue = BooleanField( 'seeking_venue' )
 
     seeking_description = StringField(
             'seeking_description'
-     )
+    )
 

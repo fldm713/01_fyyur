@@ -108,7 +108,9 @@ def show_venue(venue_id):
   print(data.keys())
   data.pop('_sa_instance_state', None)
 
-  query = Show.query.filter_by(venue_id=venue_id)
+  # query = Show.query.filter_by(venue_id=venue_id)
+  # modified and now using JOIN
+  query = db.session.query(Show).join(Show.venue)
   upcoming_shows = query.filter(Show.start_time >= datetime.today()).order_by('start_time').all()
   past_shows = query.filter(Show.start_time < datetime.today()).order_by(desc('start_time')).all()
 
@@ -261,7 +263,9 @@ def show_artist(artist_id):
   print(data.keys())
   data.pop('_sa_instance_state', None)
 
-  query = Show.query.filter_by(artist_id=artist_id)
+  # query = Show.query.filter_by(artist_id=artist_id)
+  # Using JOIN query
+  query = db.session.query(Show).join(Show.artist)
   upcoming_shows = query.filter(Show.start_time >= datetime.today()).order_by('start_time').all()
   past_shows = query.filter(Show.start_time < datetime.today()).order_by(desc('start_time')).all()
 
@@ -454,8 +458,5 @@ if not app.debug:
 
 # Or specify port manually:
 if __name__ == '__main__':
-  # to pre laod some data for testing
-  # if app.debug:
-  #   pre_load_data(db)
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=5000)

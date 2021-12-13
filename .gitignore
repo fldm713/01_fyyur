@@ -1,2 +1,4 @@
 venv/
-__pycache__/
+__pycache__/*
+
+pre_load_data.py
